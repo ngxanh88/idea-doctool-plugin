@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idea-plugin url="http://www.jetbrains.com/idea">
+    <id>de.unipotsdam.plugin.id</id>
+    <name>DocTool Checker</name>
+    <version>1.0</version>
+    <vendor email="xunguyen@uni-potsdam.de" url="http://www.uni-potsdam.de/">Universität Potsdam</vendor>
+
+    <resource-bundle>bundle.PluginBundle</resource-bundle>
+
+    <description><![CDATA[
+      Enter short description for your plugin here.<br>
+      <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <change-notes><![CDATA[
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="145.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable service in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <projectService serviceInterface="de.uni.potsdam.doctool.configuration.DocToolConfigState"
+                        serviceImplementation="de.uni.potsdam.doctool.configuration.DocToolConfigState"/>
+
+        <projectService serviceInterface="de.uni.potsdam.doctool.service.DocToolService"
+                        serviceImplementation="de.uni.potsdam.doctool.service.DocToolService"/>
+
+        <projectConfigurable groupId="tools" instance="de.uni.potsdam.doctool.configuration.DocToolConfigurable"/>
+
+        <toolWindow id="DocTool" anchor="bottom" canCloseContents="false"
+                    factoryClass="de.uni.potsdam.doctool.toolwindow.DocToolWindowFactory"/>
+
+        <localInspection implementationClass="de.uni.potsdam.doctool.inspection.DocToolInspection"
+                         bundle="bundle.PluginBundle"
+                         key="inspection.display-name"
+                         groupKey="inspection.group"
+                         level="WARNING"
+                         enabledByDefault="true"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <group id="DocToolPluginActions" text="DocTool" popup="true">
+            <action id="DocToolAction.closeWondow"
+                    class="de.uni.potsdam.doctool.action.DocToolWindowClose"
+                    text="close tool window"
+                    icon="/actions/close.png">
+            </action>
+
+            <action id="DocToolAction.CheckCurrentFile"
+                    class="de.uni.potsdam.doctool.action.CheckCurrentFile"
+                    text="Check current file with DocTool"
+                    description="Run check documentation on the current file"
+                    icon="/fileTypes/any_type.png">
+                <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            </action>
+
+            <action id="DocToolAction.CheckModule"
+                    class="de.uni.potsdam.doctool.action.CheckModule"
+                    text="Check module with DocTool"
+                    description="Run check documentation on the project"
+                    icon="/modules/resourcesRoot.png">
+            </action>
+
+            <action id="DocToolAction.CheckProject"
+                    class="de.uni.potsdam.doctool.action.CheckProject"
+                    text="Check project with DocTool"
+                    description="Run check documentation on the project"
+                    icon="/nodes/ideaProject.png">
+            </action>
+
+            <action id="DocToolAction.TreeCollapseAll"
+                    class="de.uni.potsdam.doctool.action.TreeCollapseAll"
+                    text="Collapse All Tree"
+                    icon="/actions/collapseall.png">
+            </action>
+
+            <action id="DocToolAction.TreeExpandAll"
+                    class="de.uni.potsdam.doctool.action.TreeExpandAll"
+                    text="Expand All Tree"
+                    icon="/actions/expandall.png">
+            </action>
+
+            <action id="DocToolAction.DisplayInfo"
+                    class="de.uni.potsdam.doctool.action.DisplayInfo"
+                    text="display info"
+                    icon="/general/balloonInformation.png">
+            </action>
+
+            <action id="DocToolAction.DisplayWarning"
+                    class="de.uni.potsdam.doctool.action.DisplayWarning"
+                    text="display warning"
+                    icon="/general/balloonWarning.png">
+            </action>
+        </group>
+    </actions>
+
+</idea-plugin>
