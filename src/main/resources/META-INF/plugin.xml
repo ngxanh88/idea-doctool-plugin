@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<idea-plugin url="http://www.jetbrains.com/idea">
+<idea-plugin version="2" url="http://www.jetbrains.com/idea">
     <id>de.unipotsdam.plugin.id</id>
     <name>DocTool Checker</name>
     <version>1.0</version>
@@ -23,9 +23,8 @@
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
-    <!-- uncomment to enable service in all products
-    <depends>com.intellij.modules.lang</depends>
-    -->
+    <!-- uncomment to enable service in all products-->
+    <depends>com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->

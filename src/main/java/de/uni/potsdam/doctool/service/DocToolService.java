@@ -44,8 +44,8 @@ public class DocToolService {
         final VirtualFile virtualFile = psiFile.getVirtualFile();
 
         Results.clear();
-        final List<Results.Result> resultList = this.docTool.checkFile(virtualFile.getPath());
-//        final List<Results.Result> resultList = this.docTool.checkSourceAsString(psiFile.getText(), virtualFile.getPath());
+//        final List<Results.Result> resultList = this.docTool.checkFile(virtualFile.getPath());
+        final List<Results.Result> resultList = this.docTool.checkSourceAsString(psiFile.getText(), virtualFile.getPath());
 
         final Map<PsiFile, List<DocProblem>> problemMap = new HashMap<>();
 
@@ -85,8 +85,8 @@ public class DocToolService {
 
             if(psiFile != null) {
                 Results.clear();
-                final List<Results.Result> resultList = this.docTool.checkFile(virtualFile.getPath());
-//                final List<Results.Result> resultList = this.docTool.checkSourceAsString(psiFile.getText(), virtualFile.getPath());
+//                final List<Results.Result> resultList = this.docTool.checkFile(virtualFile.getPath());
+                final List<Results.Result> resultList = this.docTool.checkSourceAsString(psiFile.getText(), virtualFile.getPath());
 
                 problemMap.put(psiFile, DocProblemConverter.convertToListDocProblem(psiFile, resultList));
                 Results.clear();
