@@ -17,7 +17,7 @@ import java.util.Map;
 import static de.uni.potsdam.doctool.configuration.Setting.*;
 
 /**
- * Created by ngxanh88 on 14.06.17.
+ * The configuration UI of the idea plugin
  */
 public class DocToolConfigGUI {
 
@@ -34,6 +34,9 @@ public class DocToolConfigGUI {
     private final JCheckBox allAlibiScoreCb = new JCheckBox();
     private final JCheckBox parseOnlyCb = new JCheckBox();
 
+    /**
+     * Create a new instance of GUI.
+     */
     public DocToolConfigGUI() {
         this.rootPanel = new JPanel(new BorderLayout());
 
@@ -44,10 +47,19 @@ public class DocToolConfigGUI {
         this.rootPanel.add(buildDocToolConfigPanel(), BorderLayout.NORTH);
     }
 
+    /**
+     * get root panel of the configuration UI.
+     * @return the instance of root panel.
+     */
     public JPanel getRootPanel() {
         return rootPanel;
     }
 
+    /**
+     * get all new DocTool settings value from the configuration UI.
+     *
+     * @return the settings Map with setting label ({@link de.uni.potsdam.doctool.configuration.Setting}) as key and new value
+     */
     public Map<String, String> getNewSettings() {
         final Map<String, String> configMap = new HashMap<>();
 
@@ -64,6 +76,12 @@ public class DocToolConfigGUI {
         return configMap;
     }
 
+    /**
+     * check settings of the configuration UI changed or not
+     *
+     * @param configState the DocTool Settings Storage.
+     * @return true when all values from the configuration UI are different from the DocTool Settings Storage.
+     */
     public boolean hasNoChangedSettings(@NotNull final DocToolConfigState configState) {
         return StringUtils.equals(configState.getConfig(PROGRAMMING_LANGUAGE),      (String) progLangComboBox.getSelectedItem())
                 && StringUtils.equals(configState.getConfig(DOCUMENTATION_LANGUAGE),(String) docLangComboBox.getSelectedItem())
@@ -77,6 +95,11 @@ public class DocToolConfigGUI {
                 && StringUtils.equals(configState.getConfig(PROTECTED_VISIBLE),     convertBoolean(visibleProtectedCb.isSelected()));
     }
 
+    /**
+     * set setting values into the configuration UI with the DocTool Settings Storage.
+     *
+     * @param configState the DocTool Settings Storage.
+     */
     public void setConfigSettings(@NotNull final DocToolConfigState configState) {
         progLangComboBox.setSelectedItem(configState.getConfig(PROGRAMMING_LANGUAGE));
         docLangComboBox.setSelectedItem(configState.getConfig(DOCUMENTATION_LANGUAGE));

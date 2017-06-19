@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by ngxanh88 on 01.06.17.
+ * Action to execute DocTool check on the current file
  */
 public class CheckCurrentFile extends DocToolBaseAction {
 

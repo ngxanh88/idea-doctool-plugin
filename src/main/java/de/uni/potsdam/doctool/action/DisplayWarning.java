@@ -8,7 +8,7 @@ import de.uni.potsdam.doctool.PluginContext;
 import de.uni.potsdam.doctool.toolwindow.DocToolWindowPanel;
 
 /**
- * Created by ngxanh88 on 13.06.17.
+ * Action to toggle (hide or show) warning item in DocTool tool window.
  */
 public class DisplayWarning extends ToggleAction {
 

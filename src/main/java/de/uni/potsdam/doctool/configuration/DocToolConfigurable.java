@@ -12,15 +12,24 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 /**
- * Created by ngxanh88 on 13.06.17.
+ * The configurable component of Plugin for inclusion into the Settings.
+ * This provide the Swing form as GUI component.
+ * Registered in {@code plugin.xml} as a {@code projectConfigurable}
  */
 public class DocToolConfigurable implements Configurable {
 
+    /** the current project */
     private final Project project;
 
+    /** the DocTool Settings Storage instance. */
     private final DocToolConfigState configState;
+    /** The configuration UI in Swing form */
     private final DocToolConfigGUI configGUI;
 
+    /**
+     * Create a new configurable component bean.
+     * @param project the current project
+     */
     public DocToolConfigurable(@NotNull final Project project) {
         this.project = project;
         this.configState = PluginContext.getPluginConfigState(project);

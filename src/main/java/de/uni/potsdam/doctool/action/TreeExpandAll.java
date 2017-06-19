@@ -7,7 +7,7 @@ import com.intellij.openapi.project.Project;
 import de.uni.potsdam.doctool.PluginContext;
 
 /**
- * Created by ngxanh88 on 12.06.17.
+ * Action to expand all nodes (ProblemTreeNode) of DocTool tool window.
  */
 public class TreeExpandAll extends DocToolBaseAction {
 

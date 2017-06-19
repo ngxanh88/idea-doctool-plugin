@@ -6,12 +6,15 @@ import javax.swing.tree.TreeCellRenderer;
 import java.awt.*;
 
 /**
- * Created by ngxanh88 on 01.06.17.
+ * The tree cell renderer for problem tree nodes in the tool window.
  */
 public class ProblemTreeCellRenderer extends JLabel implements TreeCellRenderer {
 
     private boolean isSelected;
 
+    /**
+     * create instance of tree cell renderer.
+     */
     public ProblemTreeCellRenderer() {
         super();
         setOpaque(false);

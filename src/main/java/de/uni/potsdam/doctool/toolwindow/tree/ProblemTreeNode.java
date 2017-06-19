@@ -5,7 +5,7 @@ import javax.swing.tree.TreeNode;
 import java.util.Vector;
 
 /**
- * Created by ngxanh88 on 01.06.17.
+ * Problem results tree node with toggleable visibility.
  */
 public class ProblemTreeNode extends DefaultMutableTreeNode {
 
@@ -14,7 +14,7 @@ public class ProblemTreeNode extends DefaultMutableTreeNode {
     public ProblemTreeNode() {
     }
 
-    public ProblemTreeNode(Object userObject) {
+    public ProblemTreeNode(final Object userObject) {
         super(userObject);
     }
 

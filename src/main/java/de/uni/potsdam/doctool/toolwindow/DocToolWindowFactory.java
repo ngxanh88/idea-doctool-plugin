@@ -9,6 +9,9 @@ import com.intellij.ui.content.ContentFactory;
 import de.uni.potsdam.doctool.PluginBundle;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Factory to create DocTool tool window. This is registered as {@code toolWindow} in {@code plugin.xml}.
+ */
 public class DocToolWindowFactory implements ToolWindowFactory {
 
     @Override

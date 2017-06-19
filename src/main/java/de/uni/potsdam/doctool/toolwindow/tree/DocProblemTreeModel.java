@@ -13,12 +13,16 @@ import javax.swing.tree.TreeNode;
 import java.util.*;
 
 /**
- * Created by ngxanh88 on 01.06.17.
+ * The problem tree model of the DocTool tool window.
  */
 public class DocProblemTreeModel extends DefaultTreeModel {
 
+    /** the root node of the problems tree */
     private final DefaultMutableTreeNode resultRootNode;
 
+    /**
+     * create new instance of tree model.
+     */
     public DocProblemTreeModel() {
         super(new DefaultMutableTreeNode());
 
@@ -28,7 +32,14 @@ public class DocProblemTreeModel extends DefaultTreeModel {
         setRootMessage(null);
     }
 
-    public void setRootMessage(String messageText) {
+    /**
+     * set message text for root node of result tree.
+     * <p>This will trigger a reload on the model with a node changed event
+     * {@link javax.swing.tree.DefaultTreeModel#nodeChanged(TreeNode)}</p>
+     *
+     * @param messageText the message text of root node.
+     */
+    public void setRootMessage(final String messageText) {
         if (messageText == null) {
             resultRootNode.setUserObject(new ProblemTreeData(PluginBundle.message("doctool.toolwindow.no-check")));
         } else {
@@ -38,16 +49,34 @@ public class DocProblemTreeModel extends DefaultTreeModel {
         nodeChanged(resultRootNode);
     }
 
+    /**
+     * remove all child node from the root node of result tree.
+     * <p>This will trigger a reload on the model with a node structure changed event
+     * {@link javax.swing.tree.DefaultTreeModel#nodeStructureChanged(TreeNode)}</p>
+     */
     public void clear() {
         resultRootNode.removeAllChildren();
         nodeStructureChanged(resultRootNode);
     }
 
+    /**
+     * get root node of result tree
+     * @return the instance of root node
+     */
     public TreeNode getResultRootNode() {
         return resultRootNode;
     }
 
-    public void setResultTree(@NotNull final Map<PsiFile, List<DocProblem>> results, boolean displayWarning, boolean displayInfo) {
+    /**
+     * create problems tree node of the DocTool tool window with DocTool Checker result
+     * <p>This will trigger a reload on the model with a node structure changed event
+     * {@link javax.swing.tree.DefaultTreeModel#nodeStructureChanged(TreeNode)}</p>
+     *
+     * @param results the documentation problem results of DocTool checker.
+     * @param displayWarning the option to show or hide warning item.
+     * @param displayInfo the option to show or hide info item.
+     */
+    public void createResultTree(@NotNull final Map<PsiFile, List<DocProblem>> results, boolean displayWarning, boolean displayInfo) {
         resultRootNode.removeAllChildren();
 
         int itemCount = 0;
@@ -88,6 +117,14 @@ public class DocProblemTreeModel extends DefaultTreeModel {
         nodeStructureChanged(resultRootNode);
     }
 
+    /**
+     * show or hide the warning and info item of the problems tree in the tool window.
+     * <p>This will trigger a reload on the model with a node structure changed event
+     * {@link javax.swing.tree.DefaultTreeModel#nodeStructureChanged(TreeNode)}</p>
+     *
+     * @param displayWarning the option to show or hide warning item.
+     * @param displayInfo the option to show or hide info item.
+     */
     public void filter(boolean displayWarning, boolean displayInfo) {
 
         final List<ProblemTreeNode> changedNodes = new ArrayList<>();

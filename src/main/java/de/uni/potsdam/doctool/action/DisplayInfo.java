@@ -8,7 +8,7 @@ import de.uni.potsdam.doctool.PluginContext;
 import de.uni.potsdam.doctool.toolwindow.DocToolWindowPanel;
 
 /**
- * Created by ngxanh88 on 14.06.17.
+ * Action to toggle (hide or show) info item in DocTool tool window.
  */
 public class DisplayInfo extends ToggleAction {
 

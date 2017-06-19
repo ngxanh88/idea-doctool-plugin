@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by ngxanh88 on 08.06.17.
+ * Action to execute DocTool check on the project root path
  */
 public class CheckProject extends DocToolBaseAction {
 

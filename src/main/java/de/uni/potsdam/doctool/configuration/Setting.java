@@ -6,29 +6,47 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by ngxanh88 on 13.06.17.
+ * the Setting helper of DocTool
  */
 public class Setting {
 
+    /** the default setting key label : programming language of DocTool */
     public static final String PROGRAMMING_LANGUAGE = "PROGRAMMING_LANGUAGE";
+    /** the default setting key label : documentation language of DocTool */
     public static final String DOCUMENTATION_LANGUAGE = "DOCUMENTATION_LANGUAGE";
+    /** the default setting key label : enable or disable all test (alibi and completeness) */
     public static final String ALL_TESTS_ON = "ALL_TESTS_ON";
+    /** the default setting key label : enable or disable the alibi test */
     public static final String ALIBI = "ALIBI";
+    /** the default setting key label : enable or disable the completeness test */
     public static final String COMPLETENESS = "COMPLETENESS";
+    /** the default setting key label : enable or disable return results with all alibi score (info, warning and error result) */
     public static final String ALL_ALIBI_SCORE = "ALL_ALIBI_SCORE";
+    /** the default setting key label : enable or disable parse only (when on the DocTool does not print results to log file and console) */
     public static final String PARSE_ONLY = "PARSE_ONLY";
+    /** the default setting key label : enable or disable the private member check */
     public static final String PRIVATE_VISIBLE = "PRIVATE_VISIBLE";
+    /** the default setting key label : enable or disable the protected member check */
     public static final String PROTECTED_VISIBLE = "PROTECTED_VISIBLE";
 
-
+    /** the java programming language setting value */
     public static final String JAVA_LANGUAGE = "JAVA_LANGUAGE";
+    /** the antlr programming language setting value */
     public static final String ANTLR_LANGUAGE = "ANTLR_LANGUAGE";
+    /** the germany documentation language setting value */
     public static final String DE_LANGUAGE = "DE_LANGUAGE";
+    /** the english documentation language setting value */
     public static final String EN_LANGUAGE = "EN_LANGUAGE";
 
+    /** the 'on' setting value */
     public static final String ON = "ON";
+    /** the 'off' setting value */
     public static final String OFF = "OFF";
 
+    /**
+     * get default settings of DocTool
+     * @return the default settings map.
+     */
     public static Map<String, String> getDefaultSetting() {
         final Map<String, String> settingMap = new HashMap<>();
 
@@ -45,6 +63,11 @@ public class Setting {
         return settingMap;
     }
 
+    /**
+     * check configuration map has all default settings of DocTool.
+     * @param configMap the configuration map to check.
+     * @return true when the configuration map has all default settings.
+     */
     public static boolean hasDocToolSetting(@NotNull final Map<String, String> configMap) {
         return configMap.get(PROGRAMMING_LANGUAGE) != null
                 && configMap.get(DOCUMENTATION_LANGUAGE) != null
@@ -57,6 +80,11 @@ public class Setting {
                 && configMap.get(PROTECTED_VISIBLE) != null;
     }
 
+    /**
+     * convert boolean value to the 'on'/'off' setting value
+     * @param b the boolean value to convert.
+     * @return the 'on'/'off' setting value as {@code String}.
+     */
     public static String convertBoolean(boolean b) {
         return b ? ON : OFF;
     }

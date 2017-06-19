@@ -12,18 +12,34 @@ import de.uni.potsdam.doctool.toolwindow.DocToolWindowPanel;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by ngxanh88 on 09.05.17.
+ * A context manager for get all Plugin service and instance,
+ * that is registered in {@code plugin.xml}.
  */
 public class PluginContext {
 
     private PluginContext() {
     }
 
+    /**
+     * {@link DocToolService} is registered as {@code ProjectService} of Plugin.
+     * <p>This Method get DocTool Service Instance from current project.</p>
+     *
+     * @param project this current project muss be {@link NotNull}.
+     * @return DocTool Service Instance.
+     */
     @NotNull
     public static DocToolService getDocTool(@NotNull final Project project) {
         return ServiceManager.getService(project, DocToolService.class);
     }
 
+    /**
+     * {@link DocToolConfigState} is registered as {@code ProjectService} of Plugin
+     * and used as config storage.
+     * <p>This Method get DocTool config storage Instance from current project.</p>
+     *
+     * @param project this current project muss be {@link NotNull}.
+     * @return DocTool Config Storage instance {@link DocToolConfigState}
+     */
     @NotNull
     public static DocToolConfigState getPluginConfigState(@NotNull final Project project) {
         final DocToolConfigState configState = ServiceManager.getService(project, DocToolConfigState.class);
@@ -34,11 +50,23 @@ public class PluginContext {
         return configState;
     }
 
+    /**
+     * get DocTool tool window instance.
+     *
+     * @param project this current project muss be {@link NotNull}.
+     * @return instance of {@link ToolWindow}
+     */
     @NotNull
     public static ToolWindow getToolWindow(@NotNull final Project project) {
         return ToolWindowManager.getInstance(project).getToolWindow(PluginBundle.DOC_TOOL_WINDOW_ID);
     }
 
+    /**
+     * get panel from DocTool tool window instance.
+     *
+     * @param project this current project muss be {@link NotNull}.
+     * @return instance of {@link DocToolWindowPanel}
+     */
     @NotNull
     public static DocToolWindowPanel getToolWindowPanel(@NotNull final Project project) {
         final ToolWindow toolWindow = getToolWindow(project);

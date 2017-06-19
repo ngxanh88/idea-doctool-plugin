@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <idea-plugin version="2" url="http://www.jetbrains.com/idea">
-    <id>de.unipotsdam.plugin.id</id>
+    <id>de.uni.potsdam.idea.doctool.plugin</id>
     <name>DocTool Checker</name>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <vendor email="xunguyen@uni-potsdam.de" url="http://www.uni-potsdam.de/">Universität Potsdam</vendor>
 
     <resource-bundle>bundle.PluginBundle</resource-bundle>
 
     <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+        <p>
+            This DocTool is a tool to check the completeness and meaningfulness of documentation (javaDoc) in java files.
+            This Plugin provides with or without real-time scanning of Java files with DocTool from within IDEA.
+        </p>
     ]]></description>
 
     <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+        <ul>
+            <li>1.0.0: the first version from idea-doctool-plugin.</li>
+        </ul>
     ]]>
     </change-notes>
 

@@ -6,7 +6,7 @@ import com.intellij.openapi.project.Project;
 import de.uni.potsdam.doctool.PluginContext;
 
 /**
- * Created by ngxanh88 on 12.06.17.
+ * Action to close DocTool tool window
  */
 public class DocToolWindowClose extends DocToolBaseAction {
 

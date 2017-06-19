@@ -9,7 +9,7 @@ import com.intellij.openapi.wm.ToolWindow;
 import de.uni.potsdam.doctool.PluginContext;
 
 /**
- * Created by ngxanh88 on 01.06.17.
+ * Base Action to enable DocTool tool window by default
  */
 public abstract class DocToolBaseAction extends AnAction {
 

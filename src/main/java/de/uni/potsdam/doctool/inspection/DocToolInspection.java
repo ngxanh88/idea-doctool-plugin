@@ -14,17 +14,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static de.uni.potsdam.doctool.util.AsyncProcess.asyncResultOf;
+import static de.uni.potsdam.doctool.util.AsyncProcess.startAsync;
 
 /**
- * Created by ngxanh88 on 06.06.17.
+ * Inspection to static analyse current file when that is opened or changed
  */
 public class DocToolInspection extends LocalInspectionTool {
 
     @Override
     public ProblemDescriptor[] checkFile(@NotNull final PsiFile psiFile, @NotNull final InspectionManager manager, final boolean isOnTheFly) {
         System.out.println("Inspection check file.");
-        return DocProblemConverter.convertToListProblemDescriptor(asyncResultOf(() -> inspectFile(psiFile, manager), Collections.emptyList()), manager);
+        return DocProblemConverter.convertToListProblemDescriptor(startAsync(() -> inspectFile(psiFile, manager), Collections.emptyList()), manager);
     }
 
     private List<DocProblem> inspectFile(@NotNull final PsiFile psiFile, @NotNull final InspectionManager manager) {

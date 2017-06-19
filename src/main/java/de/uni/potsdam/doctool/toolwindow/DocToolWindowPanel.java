@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by ngxanh88 on 01.06.17.
+ * DocTool {@link JPanel} of tool window {@code ToolWindow}
  */
 public class DocToolWindowPanel extends JPanel {
 
@@ -45,7 +45,11 @@ public class DocToolWindowPanel extends JPanel {
     private boolean displayingWarning = true;
     private boolean displayingInfo = false;
 
-    public DocToolWindowPanel(@NotNull final Project project) {
+    /**
+     * create instance of DocToll tool window panel to manage and show all documentation problems as tree.
+     * @param project current project that is opened.
+     */
+    DocToolWindowPanel(@NotNull final Project project) {
         super(new BorderLayout());
         this.project = project;
 
@@ -102,52 +106,89 @@ public class DocToolWindowPanel extends JPanel {
         return toolPanel;
     }
 
+    /**
+     * check results tree from panel
+     * @return true when problem tree model has results.
+     */
     public boolean hasDocProblem() {
         return treeModel.getResultRootNode().getChildCount() > 0;
     }
 
+    /**
+     * * Show problems tree in tool window when DocTool return results
+     * @param results Documentation problem Map
+     */
     public void displayResults(final Map<PsiFile, List<DocProblem>> results) {
-        treeModel.setResultTree(results, displayingWarning, displayingInfo);
+        treeModel.createResultTree(results, displayingWarning, displayingInfo);
 
         invalidate();
         repaint();
         expandTree();
     }
 
+    /**
+     * Show message in tool window when DocTool is starting and checking
+     */
     public void displayInProgress() {
         treeModel.clear();
         treeModel.setRootMessage(PluginBundle.message("doctool.toolwindow.in-process"));
     }
 
+    /**
+     * * Show message in tool window
+     * @param msg message to show
+     */
     public void displayMessage(String msg) {
         treeModel.clear();
         treeModel.setRootMessage(msg);
     }
 
+    /**
+     * collapse problems tree in tool window
+     */
     public void collapseTree() {
         for (int i = 1; i < resultsTree.getRowCount(); ++i) {
             resultsTree.collapseRow(i);
         }
     }
 
+    /**
+     * expand problems tree in tool window
+     */
     public void expandTree() {
         expandNode(resultsTree, treeModel.getResultRootNode(), new TreePath(treeModel.getPathToRoot(treeModel.getResultRootNode())), 3);
     }
 
+    /**
+     * get option to display warning item
+     * @return true when warning item is displayed in tool window
+     */
     public boolean isDisplayingWarning() {
         return displayingWarning;
     }
 
+    /**
+     * set option to display warning item
+     * @param displayingWarning option to show or hide warning item
+     */
     public void setDisplayingWarning(boolean displayingWarning) {
         this.displayingWarning = displayingWarning;
 
         treeModel.filter(displayingWarning, displayingInfo);
     }
 
+    /**
+     * get option to display info item
+     * @return true when info item is displayed in tool window
+     */
     public boolean isDisplayingInfo() {
         return displayingInfo;
     }
 
+    /**
+     * set option to display info item
+     * @param displayingInfo option to show or hide info item
+     */
     public void setDisplayingInfo(boolean displayingInfo) {
         this.displayingInfo = displayingInfo;
 

@@ -20,14 +20,21 @@ import java.util.Map;
 import static de.uni.potsdam.doctool.configuration.Setting.*;
 
 /**
- * Created by ngxanh88 on 07.06.17.
+ * Make DocTool available to run as a project-level service because the DocTool check per project.
+ * This is only one instance of a service is loaded in per project.
+ * Registered in {@code plugin.xml} as a {@code projectService}
  */
 public class DocToolService {
 
+    /** the DocTool api instance */
     private final DocTool docTool;
-
+    /** the current project */
     private final Project project;
 
+    /**
+     * Create a new service component bean.
+     * @param project the current project.
+     */
     public DocToolService(@NotNull final Project project) {
         this.project = project;
         this.docTool = new DocTool(createDocToolConfig());
@@ -35,10 +42,19 @@ public class DocToolService {
         System.out.println("create new instance doc tool service");
     }
 
+    /**
+     * reset all the DocTool Config with the DocTool Settings Storage {@link de.uni.potsdam.doctool.configuration.DocToolConfigState}.
+     */
     public void resetConfig() {
         this.docTool.setConfig(createDocToolConfig());
     }
 
+    /**
+     * scan and check current psi file with DocTool api
+     *
+     * @param psiFile the psi file to check muss be {@link NotNull}.
+     * @return the map from this psi file and list problem wrapper of psi file
+     */
     @NotNull
     public Map<PsiFile, List<DocProblem>> checkPsiFile(@NotNull final PsiFile psiFile) {
         final VirtualFile virtualFile = psiFile.getVirtualFile();
@@ -55,11 +71,22 @@ public class DocToolService {
         return problemMap;
     }
 
+    /**
+     * scan and check total current project.
+     *
+     * @return the map from psi file of current project and list problem wrapper of psi file
+     */
     @NotNull
     public Map<PsiFile, List<DocProblem>> checkProject() {
         return checkVirtualFile(project.getBaseDir());
     }
 
+    /**
+     * scan and check list file with DocTool api
+     *
+     * @param virtualFiles the array of file muss be {@link NotNull}.
+     * @return the map from psi file instance of this files and list problem wrapper of psi file
+     */
     @NotNull
     public Map<PsiFile, List<DocProblem>> checkVirtualFiles(@NotNull final VirtualFile[] virtualFiles) {
         final Map<PsiFile, List<DocProblem>> problemMap = new HashMap<>();
@@ -70,6 +97,11 @@ public class DocToolService {
         return problemMap;
     }
 
+    /**
+     * scan and check current file with DocTool api
+     * @param virtualFile the virtual file muss be {@link NotNull}.
+     * @return the map from psi file instance of this file and list problem wrapper of psi file
+     */
     @NotNull
     public Map<PsiFile, List<DocProblem>> checkVirtualFile(@NotNull final VirtualFile virtualFile) {
         final Map<PsiFile, List<DocProblem>> problemMap = new HashMap<>();

@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by ngxanh88 on 13.06.17.
+ * the manager for the persistent DocTool plug-in configuration. Registered in {@code plugin.xml}.
  */
 @State(
     name = "DocToolConfigState",
@@ -21,20 +21,44 @@ import java.util.Map;
 )
 public class DocToolConfigState implements PersistentStateComponent<DocToolConfigState.DocToolSetting>{
 
+    /** the DocTool Settings Storage. */
     private final Map<String, String> storage = new HashMap<>();
 
+    /**
+     * add new Settings into the DocTool Settings Storage.
+     *
+     * @param configMap the new settings map of the DocTool.
+     */
     public void addConfig(@NotNull final Map<String, String> configMap) {
         storage.putAll(configMap);
     }
 
+    /**
+     * add new Setting into the DocTool Settings Storage.
+     *
+     * @param key the setting label key {@link de.uni.potsdam.doctool.configuration.Setting}
+     * @param value the new setting value.
+     */
     public void addConfig(@NotNull final String key, @NotNull final String value) {
         storage.put(key, value);
     }
 
+    /**
+     * get setting of the DocTool with key label.
+     *
+     * @param key the setting label key {@link de.uni.potsdam.doctool.configuration.Setting}
+     * @return the value of this setting label.
+     */
     public String getConfig(@NotNull final String key) {
         return storage.get(key);
     }
 
+    /**
+     * check a Settings Storage has all default settings of the DocTool.
+     * <p> the default setting labels are defined in {@link de.uni.potsdam.doctool.configuration.Setting}</p>
+     *
+     * @return true when all default labels are defined.
+     */
     public boolean hasConfig() {
         return Setting.hasDocToolSetting(storage);
     }
@@ -54,8 +78,12 @@ public class DocToolConfigState implements PersistentStateComponent<DocToolConfi
         }
     }
 
+    /**
+     * the Wrapper of the persistent state serialisation.
+     */
     public static class DocToolSetting {
 
+        /** the configuration map for serialisation purposes */
         public Map<String, String> configuration;
 
         public DocToolSetting() {

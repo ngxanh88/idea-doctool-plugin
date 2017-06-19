@@ -20,19 +20,35 @@ import java.util.stream.Collectors;
 import static java.util.Optional.ofNullable;
 
 /**
- * Created by ngxanh88 on 07.06.17.
+ * the converter helper for documentation problem.
  */
 public class DocProblemConverter {
 
+    /**
+     * convert list documentation problem wrapper to array of {@link ProblemDescriptor}.
+     * <p>the {@link ProblemDescriptor} is used in {@link de.uni.potsdam.doctool.inspection.DocToolInspection} to inspect problem in source code.</p>
+     *
+     * @param docProblemList the list documentation problem wrapper
+     * @param manager the inspection manager of IDEA Plugin
+     * @return the array of {@link ProblemDescriptor}
+     */
     @NotNull
-    public static ProblemDescriptor[] convertToListProblemDescriptor(final List<DocProblem> docProblemWrappers, @NotNull final InspectionManager manager) {
-        return ofNullable(docProblemWrappers)
-                .map(docProblems -> docProblemWrappers.stream()
+    public static ProblemDescriptor[] convertToListProblemDescriptor(final List<DocProblem> docProblemList, @NotNull final InspectionManager manager) {
+        return ofNullable(docProblemList)
+                .map(docProblems -> docProblemList.stream()
                         .map(docProblem -> convertToProblemDescriptor(docProblem, manager))
                         .toArray(ProblemDescriptor[]::new))
                 .orElseGet(() -> ProblemDescriptor.EMPTY_ARRAY);
     }
 
+    /**
+     * convert documentation problem wrapper to {@link ProblemDescriptor}.
+     * <p>the {@link ProblemDescriptor} is used in {@link de.uni.potsdam.doctool.inspection.DocToolInspection} to inspect problem in source code.</p>
+     *
+     * @param docProblem the documentation problem wrapper
+     * @param inspectionManager the inspection manager of IDEA Plugin
+     * @return the new instance of {@link ProblemDescriptor}
+     */
     @NotNull
     public static ProblemDescriptor convertToProblemDescriptor(@NotNull final DocProblem docProblem, @NotNull final InspectionManager inspectionManager) {
         return inspectionManager.createProblemDescriptor(docProblem.getTargetElement(), PluginBundle.message("inspection.message", docProblem.getMessage()),
@@ -50,6 +66,13 @@ public class DocProblemConverter {
         return ProblemHighlightType.INFORMATION;
     }
 
+    /**
+     * convert list results from DocTool checker Service to list documentation problem wrapper.
+     *
+     * @param psiFile the psi file is checked from DocTool Service
+     * @param resultList the list results from DocTool checker Service
+     * @return the list documentation problem wrapper
+     */
     @NotNull
     public static List<DocProblem> convertToListDocProblem(@NotNull final PsiFile psiFile, final List<Results.Result> resultList) {
         final List<Integer> lineLengthCache = new ArrayList<>();
@@ -63,6 +86,14 @@ public class DocProblemConverter {
                 .orElseGet(ArrayList::new);
     }
 
+    /**
+     * convert result from DocTool checker Service to documentation problem wrapper instance.
+     *
+     * @param lineLengthCache the list of line numbers from source code in psi file, that are scanned and has problem.
+     * @param psiFile the psi file is checked from DocTool Service.
+     * @param result the results from DocTool checker Service.
+     * @return the new instance of documentation problem wrapper.
+     */
     @Nullable
     private static DocProblem convertToDocProblem(@NotNull final List<Integer> lineLengthCache, @NotNull final PsiFile psiFile, @NotNull final Results.Result result) {
         final CodeCharacterUtil.Position codePosition = CodeCharacterUtil.findPosition(lineLengthCache, result.getLine(), psiFile.textToCharArray());

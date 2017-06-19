@@ -9,7 +9,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
 /**
- * Created by ngxanh88 on 07.06.17.
+ * The class create asynchronous Process and parallel execution
  */
 public class AsyncProcess {
     private static final int WAITING_TIME = 50;
@@ -17,26 +17,40 @@ public class AsyncProcess {
     private AsyncProcess() {
     }
 
+    /**
+     * start and execute a asynchronous Process with {@link Callable} task
+     *
+     * @param callable the asynchronous processing task instance.
+     * @param defaultValue the default result instance of {@code <T>} type.
+     * @param <T> the result type of {@link Callable#call()}.
+     * @return the result instance of {@code <T>} type.
+     */
     @Nullable
-    public static <T> T asyncResultOf(@NotNull final Callable<T> callable, @Nullable final T defaultValue) {
+    public static <T> T startAsync(@NotNull final Callable<T> callable, @Nullable final T defaultValue) {
         try {
-            return finished(executeOnPooledThread(callable)).get();
+            return execute(callable).get();
 
         } catch (Exception e) {
             return defaultValue;
         }
     }
 
-    private static <T> Future<T> executeOnPooledThread(final Callable<T> callable) {
-        return ApplicationManager.getApplication().executeOnPooledThread(callable);
-    }
+    /**
+     * execute a asynchronous Process with {@link Callable} task
+     *
+     * @param callable the asynchronous processing task instance.
+     * @param <T> the result type of {@link Callable#call()}.
+     * @return the result of an asynchronous computation
+     */
+    private static <T> Future<T> execute(final Callable<T> callable) {
+        final Future<T> future = ApplicationManager.getApplication().executeOnPooledThread(callable);
 
-    private static <T> Future<T> finished(final Future<T> future) {
+        // check process per 50 ms. When process is done or cancelled then return result.
         while (!future.isDone() && !future.isCancelled()) {
             ProgressManager.checkCanceled();
             try {
                 Thread.sleep(WAITING_TIME);
-            } catch (InterruptedException ignored) {
+            } catch (Exception e) {
                 Thread.currentThread().interrupt();
             }
         }
