@@ -63,7 +63,7 @@ public class DocToolConfigGUI {
     public Map<String, String> getNewSettings() {
         final Map<String, String> configMap = new HashMap<>();
 
-        configMap.put(PROGRAMMING_LANGUAGE,    (String) progLangComboBox.getSelectedItem());
+        configMap.put(PARSER_LANGUAGE,    (String) progLangComboBox.getSelectedItem());
         configMap.put(DOCUMENTATION_LANGUAGE,  (String) docLangComboBox.getSelectedItem());
         configMap.put(ALL_TESTS_ON,            convertBoolean(allTestsCb.isSelected()));
         configMap.put(ALIBI,                   convertBoolean(alibiCb.isSelected()));
@@ -83,7 +83,7 @@ public class DocToolConfigGUI {
      * @return true when all values from the configuration UI are different from the DocTool Settings Storage.
      */
     public boolean hasNoChangedSettings(@NotNull final DocToolConfigState configState) {
-        return StringUtils.equals(configState.getConfig(PROGRAMMING_LANGUAGE),      (String) progLangComboBox.getSelectedItem())
+        return StringUtils.equals(configState.getConfig(PARSER_LANGUAGE),      (String) progLangComboBox.getSelectedItem())
                 && StringUtils.equals(configState.getConfig(DOCUMENTATION_LANGUAGE),(String) docLangComboBox.getSelectedItem())
 
                 && StringUtils.equals(configState.getConfig(ALL_TESTS_ON),          convertBoolean(allTestsCb.isSelected()))
@@ -101,7 +101,7 @@ public class DocToolConfigGUI {
      * @param configState the DocTool Settings Storage.
      */
     public void setConfigSettings(@NotNull final DocToolConfigState configState) {
-        progLangComboBox.setSelectedItem(configState.getConfig(PROGRAMMING_LANGUAGE));
+        progLangComboBox.setSelectedItem(configState.getConfig(PARSER_LANGUAGE));
         docLangComboBox.setSelectedItem(configState.getConfig(DOCUMENTATION_LANGUAGE));
 
         allTestsCb.setSelected(StringUtils.equals(configState.getConfig(ALL_TESTS_ON), ON));
@@ -189,7 +189,7 @@ public class DocToolConfigGUI {
     }
 
     private ComboBox buildProgrammingLangComboBox() {
-        final String[] progLangs = (String[]) Arrays.asList(JAVA_LANGUAGE, ANTLR_LANGUAGE).toArray();
+        final String[] progLangs = (String[]) Arrays.asList(JAVACC, ANTLR).toArray();
         return new ComboBox<>(progLangs);
     }
 

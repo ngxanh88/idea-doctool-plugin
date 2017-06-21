@@ -11,7 +11,7 @@ import java.util.Map;
 public class Setting {
 
     /** the default setting key label : programming language of DocTool */
-    public static final String PROGRAMMING_LANGUAGE = "PROGRAMMING_LANGUAGE";
+    public static final String PARSER_LANGUAGE = "PARSER_LANGUAGE";
     /** the default setting key label : documentation language of DocTool */
     public static final String DOCUMENTATION_LANGUAGE = "DOCUMENTATION_LANGUAGE";
     /** the default setting key label : enable or disable all test (alibi and completeness) */
@@ -30,9 +30,9 @@ public class Setting {
     public static final String PROTECTED_VISIBLE = "PROTECTED_VISIBLE";
 
     /** the java programming language setting value */
-    public static final String JAVA_LANGUAGE = "JAVA_LANGUAGE";
+    public static final String JAVACC = "JAVACC";
     /** the antlr programming language setting value */
-    public static final String ANTLR_LANGUAGE = "ANTLR_LANGUAGE";
+    public static final String ANTLR = "ANTLR";
     /** the germany documentation language setting value */
     public static final String DE_LANGUAGE = "DE_LANGUAGE";
     /** the english documentation language setting value */
@@ -50,7 +50,7 @@ public class Setting {
     public static Map<String, String> getDefaultSetting() {
         final Map<String, String> settingMap = new HashMap<>();
 
-        settingMap.put(PROGRAMMING_LANGUAGE,    JAVA_LANGUAGE);
+        settingMap.put(PARSER_LANGUAGE, JAVACC);
         settingMap.put(DOCUMENTATION_LANGUAGE,  EN_LANGUAGE);
         settingMap.put(ALL_TESTS_ON,            ON);
         settingMap.put(ALIBI,                   ON);
@@ -69,7 +69,7 @@ public class Setting {
      * @return true when the configuration map has all default settings.
      */
     public static boolean hasDocToolSetting(@NotNull final Map<String, String> configMap) {
-        return configMap.get(PROGRAMMING_LANGUAGE) != null
+        return configMap.get(PARSER_LANGUAGE) != null
                 && configMap.get(DOCUMENTATION_LANGUAGE) != null
                 && configMap.get(ALL_TESTS_ON) != null
                 && configMap.get(ALIBI) != null

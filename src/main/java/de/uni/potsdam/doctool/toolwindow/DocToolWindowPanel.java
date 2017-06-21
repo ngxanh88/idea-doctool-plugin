@@ -42,6 +42,7 @@ public class DocToolWindowPanel extends JPanel {
     private JTree resultsTree;
     private DocProblemTreeModel treeModel;
 
+    private boolean displayingError = true;
     private boolean displayingWarning = true;
     private boolean displayingInfo = false;
 
@@ -119,7 +120,7 @@ public class DocToolWindowPanel extends JPanel {
      * @param results Documentation problem Map
      */
     public void displayResults(final Map<PsiFile, List<DocProblem>> results) {
-        treeModel.createResultTree(results, displayingWarning, displayingInfo);
+        treeModel.createResultTree(results, displayingError, displayingWarning, displayingInfo);
 
         invalidate();
         repaint();
@@ -160,6 +161,24 @@ public class DocToolWindowPanel extends JPanel {
     }
 
     /**
+     * get option to display error item
+     * @return true when error item is displayed in tool window
+     */
+    public boolean isDisplayingError() {
+        return displayingError;
+    }
+
+    /**
+     * set option to display error item
+     * @param displayingError option to show or hide error item
+     */
+    public void setDisplayingError(boolean displayingError) {
+        this.displayingError = displayingError;
+
+        treeModel.filter(displayingError, displayingWarning, displayingInfo);
+    }
+
+    /**
      * get option to display warning item
      * @return true when warning item is displayed in tool window
      */
@@ -174,7 +193,7 @@ public class DocToolWindowPanel extends JPanel {
     public void setDisplayingWarning(boolean displayingWarning) {
         this.displayingWarning = displayingWarning;
 
-        treeModel.filter(displayingWarning, displayingInfo);
+        treeModel.filter(displayingError, displayingWarning, displayingInfo);
     }
 
     /**
@@ -192,7 +211,7 @@ public class DocToolWindowPanel extends JPanel {
     public void setDisplayingInfo(boolean displayingInfo) {
         this.displayingInfo = displayingInfo;
 
-        treeModel.filter(displayingWarning, displayingInfo);
+        treeModel.filter(displayingError, displayingWarning, displayingInfo);
     }
 
     private static void expandNode(final JTree tree, final TreeNode node, final TreePath path, final int level) {

@@ -104,6 +104,12 @@
                     text="display warning"
                     icon="/general/balloonWarning.png">
             </action>
+
+            <action id="DocToolAction.DisplayError"
+                    class="de.uni.potsdam.doctool.action.DisplayError"
+                    text="display warning"
+                    icon="/general/balloonError.png">
+            </action>
         </group>
     </actions>
 

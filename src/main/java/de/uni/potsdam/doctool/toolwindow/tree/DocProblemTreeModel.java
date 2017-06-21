@@ -73,10 +73,11 @@ public class DocProblemTreeModel extends DefaultTreeModel {
      * {@link javax.swing.tree.DefaultTreeModel#nodeStructureChanged(TreeNode)}</p>
      *
      * @param results the documentation problem results of DocTool checker.
+     * @param displayError the option to show or hide error item.
      * @param displayWarning the option to show or hide warning item.
      * @param displayInfo the option to show or hide info item.
      */
-    public void createResultTree(@NotNull final Map<PsiFile, List<DocProblem>> results, boolean displayWarning, boolean displayInfo) {
+    public void createResultTree(@NotNull final Map<PsiFile, List<DocProblem>> results, boolean displayError, boolean displayWarning, boolean displayInfo) {
         resultRootNode.removeAllChildren();
 
         int itemCount = 0;
@@ -113,7 +114,7 @@ public class DocProblemTreeModel extends DefaultTreeModel {
             setRootMessage(PluginBundle.message("doctool.toolwindow.sum-result", itemCount, fileCount));
         }
 
-        filter(displayWarning, displayInfo);
+        filter(displayError, displayWarning, displayInfo);
         nodeStructureChanged(resultRootNode);
     }
 
@@ -122,10 +123,11 @@ public class DocProblemTreeModel extends DefaultTreeModel {
      * <p>This will trigger a reload on the model with a node structure changed event
      * {@link javax.swing.tree.DefaultTreeModel#nodeStructureChanged(TreeNode)}</p>
      *
+     * @param displayError the option to show or hide error item.
      * @param displayWarning the option to show or hide warning item.
      * @param displayInfo the option to show or hide info item.
      */
-    public void filter(boolean displayWarning, boolean displayInfo) {
+    public void filter(boolean displayError, boolean displayWarning, boolean displayInfo) {
 
         final List<ProblemTreeNode> changedNodes = new ArrayList<>();
 
@@ -134,6 +136,12 @@ public class DocProblemTreeModel extends DefaultTreeModel {
 
             for (ProblemTreeNode problemNode : childNode.getAllChildren()) {
                 final ProblemTreeData nodeData = (ProblemTreeData) problemNode.getUserObject();
+
+                if (StringUtils.equals(nodeData.getDocProblem().getProblemType(), DocProblem.ERROR_TYPE)) {
+                    problemNode.setVisible(displayError);
+
+                    changedNodes.add(childNode);
+                }
 
                 if (StringUtils.equals(nodeData.getDocProblem().getProblemType(), DocProblem.WARNING_TYPE)) {
                     problemNode.setVisible(displayWarning);

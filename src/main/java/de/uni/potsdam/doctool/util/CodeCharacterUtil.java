@@ -47,7 +47,7 @@ public class CodeCharacterUtil {
      * @param lineLengthCache the list of line numbers from source code, that are scanned.
      * @param lineNumber the line number from source code.
      * @param columnNumber the column number from source code.
-     * @param text the source code as character array
+     * @param text the source code in character array
      * @return the code position wrapper instance
      */
     private static Position searchFromLastScannedLine(final List<Integer> lineLengthCache, int lineNumber, int columnNumber, final char[] text) {

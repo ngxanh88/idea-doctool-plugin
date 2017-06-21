@@ -133,7 +133,7 @@ public class DocToolService {
         final DocToolConfigState configState = PluginContext.getPluginConfigState(project);
         final Config config = new Config();
 
-        if(StringUtils.equals(configState.getConfig(PROGRAMMING_LANGUAGE), ANTLR_LANGUAGE)) {
+        if(StringUtils.equals(configState.getConfig(PARSER_LANGUAGE), ANTLR)) {
             config.setProgrammingLang(Config.ProgrammingLang.java_antlr);
         } else {
             config.setProgrammingLang(Config.ProgrammingLang.java_javacc);

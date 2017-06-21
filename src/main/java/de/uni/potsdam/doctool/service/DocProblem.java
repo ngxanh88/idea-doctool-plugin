@@ -99,8 +99,10 @@ public class DocProblem {
 
     private String getProblemTypeWithResult(Results.Result result) {
         if (result.getId() == Results.Id.ALIBI_CHARACTER && result instanceof Results.AlibiResult) {
-            if (((Results.AlibiResult) result).getAlibiCharacter() < 1.0f) {
+            if (((Results.AlibiResult) result).getAlibiCharacter() >= 1.0f) {
                 return INFO_TYPE;
+            } if (((Results.AlibiResult) result).getAlibiCharacter() == 0.0f) {
+                return ERROR_TYPE;
             } else {
                 return WARNING_TYPE;
             }
