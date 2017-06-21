@@ -111,6 +111,12 @@
                     icon="/general/balloonError.png">
             </action>
         </group>
+
+        <action id="DocToolAction.CheckInProjectView"
+                class="de.uni.potsdam.doctool.action.CheckInProjectView"
+                text="Check with DocTool">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="AnalyzeMenu"/>
+        </action>
     </actions>
 
 </idea-plugin>
