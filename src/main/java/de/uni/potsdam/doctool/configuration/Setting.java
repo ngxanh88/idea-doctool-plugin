@@ -22,12 +22,12 @@ public class Setting {
     public static final String COMPLETENESS = "COMPLETENESS";
     /** the default setting key label : enable or disable return results with all alibi score (info, warning and error result) */
     public static final String ALL_ALIBI_SCORE = "ALL_ALIBI_SCORE";
-    /** the default setting key label : enable or disable parse only (when on the DocTool does not print results to log file and console) */
-    public static final String PARSE_ONLY = "PARSE_ONLY";
     /** the default setting key label : enable or disable the private member check */
     public static final String PRIVATE_VISIBLE = "PRIVATE_VISIBLE";
     /** the default setting key label : enable or disable the protected member check */
     public static final String PROTECTED_VISIBLE = "PROTECTED_VISIBLE";
+
+    //    public static final String PARSE_ONLY = "PARSE_ONLY";
 
     /** the java programming language setting value */
     public static final String JAVACC = "JAVACC";
@@ -56,7 +56,6 @@ public class Setting {
         settingMap.put(ALIBI,                   ON);
         settingMap.put(COMPLETENESS,            ON);
         settingMap.put(ALL_ALIBI_SCORE,         ON);
-        settingMap.put(PARSE_ONLY,              ON);
         settingMap.put(PRIVATE_VISIBLE,         OFF);
         settingMap.put(PROTECTED_VISIBLE,       ON);
 
@@ -75,7 +74,6 @@ public class Setting {
                 && configMap.get(ALIBI) != null
                 && configMap.get(COMPLETENESS) != null
                 && configMap.get(ALL_ALIBI_SCORE) != null
-                && configMap.get(PARSE_ONLY) != null
                 && configMap.get(PRIVATE_VISIBLE) != null
                 && configMap.get(PROTECTED_VISIBLE) != null;
     }

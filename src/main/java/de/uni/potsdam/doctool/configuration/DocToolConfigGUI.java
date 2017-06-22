@@ -32,7 +32,8 @@ public class DocToolConfigGUI {
     private final JCheckBox visiblePrivateCb = new JCheckBox();
     private final JCheckBox visibleProtectedCb = new JCheckBox();
     private final JCheckBox allAlibiScoreCb = new JCheckBox();
-    private final JCheckBox parseOnlyCb = new JCheckBox();
+
+//    private final JCheckBox parseOnlyCb = new JCheckBox();
 
     /**
      * Create a new instance of GUI.
@@ -69,7 +70,6 @@ public class DocToolConfigGUI {
         configMap.put(ALIBI,                   convertBoolean(alibiCb.isSelected()));
         configMap.put(COMPLETENESS,            convertBoolean(completenessCb.isSelected()));
         configMap.put(ALL_ALIBI_SCORE,         convertBoolean(allAlibiScoreCb.isSelected()));
-        configMap.put(PARSE_ONLY,              convertBoolean(parseOnlyCb.isSelected()));
         configMap.put(PRIVATE_VISIBLE,         convertBoolean(visiblePrivateCb.isSelected()));
         configMap.put(PROTECTED_VISIBLE,       convertBoolean(visibleProtectedCb.isSelected()));
 
@@ -90,7 +90,6 @@ public class DocToolConfigGUI {
                 && StringUtils.equals(configState.getConfig(ALIBI),                 convertBoolean(alibiCb.isSelected()))
                 && StringUtils.equals(configState.getConfig(COMPLETENESS),          convertBoolean(completenessCb.isSelected()))
                 && StringUtils.equals(configState.getConfig(ALL_ALIBI_SCORE),       convertBoolean(allAlibiScoreCb.isSelected()))
-                && StringUtils.equals(configState.getConfig(PARSE_ONLY),            convertBoolean(parseOnlyCb.isSelected()))
                 && StringUtils.equals(configState.getConfig(PRIVATE_VISIBLE),       convertBoolean(visiblePrivateCb.isSelected()))
                 && StringUtils.equals(configState.getConfig(PROTECTED_VISIBLE),     convertBoolean(visibleProtectedCb.isSelected()));
     }
@@ -110,7 +109,8 @@ public class DocToolConfigGUI {
         visiblePrivateCb.setSelected(StringUtils.equals(configState.getConfig(PRIVATE_VISIBLE), ON));
         visibleProtectedCb.setSelected(StringUtils.equals(configState.getConfig(PROTECTED_VISIBLE), ON));
         allAlibiScoreCb.setSelected(StringUtils.equals(configState.getConfig(ALL_ALIBI_SCORE), ON));
-        parseOnlyCb.setSelected(StringUtils.equals(configState.getConfig(PARSE_ONLY), ON));
+
+//        parseOnlyCb.setSelected(StringUtils.equals(configState.getConfig(PARSE_ONLY), ON));
     }
 
     private JPanel buildDocToolConfigPanel() {
@@ -134,7 +134,8 @@ public class DocToolConfigGUI {
         addComponent(docToolConfigPanel, gbl, 0, 6, 2, 1, 1.0, 0.0, visiblePrivateCb);
         addComponent(docToolConfigPanel, gbl, 0, 7, 2, 1, 1.0, 0.0, visibleProtectedCb);
         addComponent(docToolConfigPanel, gbl, 0, 8, 2, 1, 1.0, 0.0, allAlibiScoreCb);
-        addComponent(docToolConfigPanel, gbl, 0, 9, 2, 1, 1.0, 0.0, parseOnlyCb);
+
+//        addComponent(docToolConfigPanel, gbl, 0, 9, 2, 1, 1.0, 0.0, parseOnlyCb);
 
         return docToolConfigPanel;
     }
@@ -158,8 +159,8 @@ public class DocToolConfigGUI {
         allAlibiScoreCb.setText(PluginBundle.message("doctool.config.gui.all-alibi-score-checkbox-text"));
         allAlibiScoreCb.setToolTipText(PluginBundle.message("doctool.config.gui.all-alibi-score-checkbox-tooltip"));
 
-        parseOnlyCb.setText(PluginBundle.message("doctool.config.gui.parse-only-checkbox-text"));
-        parseOnlyCb.setToolTipText(PluginBundle.message("doctool.config.gui.parse-only-checkbox-tooltip"));
+//        parseOnlyCb.setText(PluginBundle.message("doctool.config.gui.parse-only-checkbox-text"));
+//        parseOnlyCb.setToolTipText(PluginBundle.message("doctool.config.gui.parse-only-checkbox-tooltip"));
 
         final ItemListener checkboxListener = e -> {
             if(e.getItem() == alibiCb || e.getItem() == completenessCb) {

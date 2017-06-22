@@ -163,10 +163,6 @@ public class DocToolService {
             config.alibi_setReportAllScores(true);
         }
 
-        if(StringUtils.equals(configState.getConfig(PARSE_ONLY), ON)) {
-            config.setResultHandling(EnumSet.noneOf (Config.ResultHandlingFlag.class) );
-        }
-
         if(StringUtils.equals(configState.getConfig(PRIVATE_VISIBLE), ON)) {
             config.getVisibility().add(Config.VisibilityFlag.PRIVATE);
         } else {
@@ -178,6 +174,9 @@ public class DocToolService {
         } else {
             config.getVisibility().remove(Config.VisibilityFlag.PROTECTED);
         }
+
+        // disable console log. need for production.
+//        config.setResultHandling(EnumSet.noneOf (Config.ResultHandlingFlag.class) );
 
         config.setStatistic_summary(true);
         config.setStatistic_log(true);

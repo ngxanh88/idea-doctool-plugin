@@ -23,7 +23,7 @@ public class DocToolInspection extends LocalInspectionTool {
 
     @Override
     public ProblemDescriptor[] checkFile(@NotNull final PsiFile psiFile, @NotNull final InspectionManager manager, final boolean isOnTheFly) {
-        System.out.println("Inspection check file.");
+//        System.out.println("Inspection check file.");
         return DocProblemConverter.convertToListProblemDescriptor(startAsync(() -> inspectFile(psiFile, manager), Collections.emptyList()), manager);
     }
 
