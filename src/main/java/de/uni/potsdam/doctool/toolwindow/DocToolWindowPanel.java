@@ -64,10 +64,14 @@ public class DocToolWindowPanel extends JPanel {
         final ActionGroup docToolActionGroup = (ActionGroup) ActionManager.getInstance().getAction(PluginBundle.DOC_TOOL_ACTION_GROUP);
         final ActionToolbar docToolActionToolbar = ActionManager.getInstance().createActionToolbar(PluginBundle.DOC_TOOL_WINDOW_ID, docToolActionGroup, false);
 
+        final ActionGroup problemtreeActionGroup = (ActionGroup) ActionManager.getInstance().getAction(PluginBundle.PROBLEM_TREE_ACTION_GROUP);
+        final ActionToolbar problemtreeToolbar = ActionManager.getInstance().createActionToolbar(PluginBundle.DOC_TOOL_WINDOW_ID, problemtreeActionGroup, false);
+
         docToolActionToolbar.getComponent().setVisible(true);
 
         final Box toolBarBox = Box.createHorizontalBox();
         toolBarBox.add(docToolActionToolbar.getComponent());
+        toolBarBox.add(problemtreeToolbar.getComponent());
 
         return toolBarBox;
     }

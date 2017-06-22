@@ -52,14 +52,14 @@
 
     <actions>
         <!-- Add your actions here -->
-        <group id="DocToolPluginActions" text="DocTool" popup="true">
-            <action id="DocToolAction.closeWondow"
+        <group id="DocToolActions" text="DocTool" popup="true">
+            <action id="DocTool.DocToolWindowClose"
                     class="de.uni.potsdam.doctool.action.DocToolWindowClose"
                     text="close tool window"
                     icon="/actions/close.png">
             </action>
 
-            <action id="DocToolAction.CheckCurrentFile"
+            <action id="DocTool.CheckCurrentFile"
                     class="de.uni.potsdam.doctool.action.CheckCurrentFile"
                     text="Check current file with DocTool"
                     description="Run check documentation on the current file"
@@ -67,52 +67,54 @@
                 <add-to-group group-id="EditorPopupMenu" anchor="last"/>
             </action>
 
-            <action id="DocToolAction.CheckModule"
+            <action id="DocTool.CheckModule"
                     class="de.uni.potsdam.doctool.action.CheckModule"
                     text="Check module with DocTool"
                     description="Run check documentation on the project"
                     icon="/modules/resourcesRoot.png">
             </action>
 
-            <action id="DocToolAction.CheckProject"
+            <action id="DocTool.CheckProject"
                     class="de.uni.potsdam.doctool.action.CheckProject"
                     text="Check project with DocTool"
                     description="Run check documentation on the project"
                     icon="/nodes/ideaProject.png">
             </action>
+        </group>
 
-            <action id="DocToolAction.TreeCollapseAll"
+        <group id="ProblemTreeActions" text="DocTool" popup="true">
+            <action id="ProblemTree.TreeCollapseAll"
                     class="de.uni.potsdam.doctool.action.TreeCollapseAll"
                     text="Collapse All Tree"
                     icon="/actions/collapseall.png">
             </action>
 
-            <action id="DocToolAction.TreeExpandAll"
+            <action id="ProblemTree.TreeExpandAll"
                     class="de.uni.potsdam.doctool.action.TreeExpandAll"
                     text="Expand All Tree"
                     icon="/actions/expandall.png">
             </action>
 
-            <action id="DocToolAction.DisplayInfo"
+            <action id="ProblemTree.DisplayInfo"
                     class="de.uni.potsdam.doctool.action.DisplayInfo"
                     text="display info"
                     icon="/general/balloonInformation.png">
             </action>
 
-            <action id="DocToolAction.DisplayWarning"
+            <action id="ProblemTree.DisplayWarning"
                     class="de.uni.potsdam.doctool.action.DisplayWarning"
                     text="display warning"
                     icon="/general/balloonWarning.png">
             </action>
 
-            <action id="DocToolAction.DisplayError"
+            <action id="ProblemTree.DisplayError"
                     class="de.uni.potsdam.doctool.action.DisplayError"
                     text="display warning"
                     icon="/general/balloonError.png">
             </action>
         </group>
 
-        <action id="DocToolAction.CheckInProjectView"
+        <action id="DocTool.CheckInProjectView"
                 class="de.uni.potsdam.doctool.action.CheckInProjectView"
                 text="Check with DocTool">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="AnalyzeMenu"/>

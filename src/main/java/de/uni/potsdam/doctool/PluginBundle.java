@@ -19,7 +19,10 @@ public class PluginBundle {
     public static final String DOC_TOOL_WINDOW_ID = "DocTool";
 
     /** action group id of DocTool is defined in {@code plugin.xml} */
-    public static final String DOC_TOOL_ACTION_GROUP = "DocToolPluginActions";
+    public static final String DOC_TOOL_ACTION_GROUP = "DocToolActions";
+
+    /** action group id of tree from tool window is defined in {@code plugin.xml} */
+    public static final String PROBLEM_TREE_ACTION_GROUP = "ProblemTreeActions";
 
     private static ResourceBundle resourceBundle;
 
