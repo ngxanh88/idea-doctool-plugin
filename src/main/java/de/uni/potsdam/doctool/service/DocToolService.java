@@ -9,13 +9,12 @@ import de.uni.potsdam.doctool.configuration.DocToolConfigState;
 import doctool.core.Config;
 import doctool.core.DocTool;
 import doctool.core.Results;
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 import static de.uni.potsdam.doctool.configuration.Setting.*;
 
@@ -27,7 +26,7 @@ import static de.uni.potsdam.doctool.configuration.Setting.*;
 public class DocToolService {
 
     /** the DocTool api instance */
-    private final DocTool docTool;
+    private final StringDocTool docTool;
     /** the current project */
     private final Project project;
 
@@ -37,7 +36,7 @@ public class DocToolService {
      */
     public DocToolService(@NotNull final Project project) {
         this.project = project;
-        this.docTool = new DocTool(createDocToolConfig());
+        this.docTool = new StringDocTool(createDocToolConfig());
 
         System.out.println("create new instance doc tool service");
     }
@@ -57,11 +56,12 @@ public class DocToolService {
      */
     @NotNull
     public Map<PsiFile, List<DocProblem>> checkPsiFile(@NotNull final PsiFile psiFile) {
-        final VirtualFile virtualFile = psiFile.getVirtualFile();
-
         Results.clear();
-//        final List<Results.Result> resultList = this.docTool.checkFile(virtualFile.getPath());
-        final List<Results.Result> resultList = this.docTool.checkSourceAsString(psiFile.getText(), virtualFile.getPath());
+
+//        final List<Results.Result> resultList = this.docTool.checkFile(psiFile.getVirtualFile().getPath());
+
+        final List<Results.Result> resultList = this.docTool.checkSourceAsString(psiFile.getText(), psiFile.getVirtualFile().getPath());
+//        final List<Results.Result> resultList = this.docTool.checkSourceCodeAsString(psiFile.getText());
 
         final Map<PsiFile, List<DocProblem>> problemMap = new HashMap<>();
 
@@ -116,12 +116,7 @@ public class DocToolService {
             final PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
 
             if(psiFile != null) {
-                Results.clear();
-//                final List<Results.Result> resultList = this.docTool.checkFile(virtualFile.getPath());
-                final List<Results.Result> resultList = this.docTool.checkSourceAsString(psiFile.getText(), virtualFile.getPath());
-
-                problemMap.put(psiFile, DocProblemConverter.convertToListDocProblem(psiFile, resultList));
-                Results.clear();
+                problemMap.putAll(checkPsiFile(psiFile));
             }
         }
 
